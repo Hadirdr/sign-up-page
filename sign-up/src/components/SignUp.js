@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {notify} from "./toast"
 import Styles from "./SignUp.module.css"
+import { Link } from 'react-router-dom';
 const SignUp = () => {
     const [data,setData] = useState({
         name:"",
@@ -106,7 +107,7 @@ const focusHandler = event =>{
                     {errors.isAccepted && touched.isAccepted && <span>{errors.isAccepted}</span>}
                 </div>
                 <div className={Styles.formButtons} >
-                 <a href='#'>Login</a>
+                 <Link to= "/login">Login</Link>
                     <button type="submit" >SignUp</button>
                 </div>
             </form>

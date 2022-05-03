@@ -1,12 +1,6 @@
- export const validate = (data) =>{
+ export const validate = (data,type) =>{
     const errors ={};
     
-    if (!data.name.trim()){
-        errors.name = "Username wrong"
-    }else {
-        delete errors.name
-    }
-
     if (!data.email){
         errors.email = "Eamil wrong"
     }else if (!/\S+@\S+\.\S+/.test(data.email)){
@@ -19,23 +13,31 @@
         errors.password = "password is required"
     }else if (data.password.lenght<6){
         errors.password = "password need to be 6 character or more"
-    }else {delete errors.password}
+    }else 
+    {delete errors.password}
     
+    if (type === "SignUp"){
 
-    if (!data.confirmPassword){
-        errors.confirmPassword = "confirm the password"
-    } else if (data.confirmPassword !== data.password){
-        errors.confirmPassword = "password do not match"
-    }else {
-        delete errors.confirmPassword
+        if (!data.name.trim()){
+            errors.name = "Username wrong"
+        }else {
+            delete errors.name
+        }
+        if (!data.confirmPassword){
+            errors.confirmPassword = "confirm the password"
+        } else if (data.confirmPassword !== data.password){
+            errors.confirmPassword = "password do not match"
+        }else {
+            delete errors.confirmPassword
+        }
+    
+        if (data.isAccepted){
+            delete errors.isAccepted
+        }else{
+            errors.isAccepted = "Accepte our regulations"
+        }
+
     }
-
-    if (data.isAccepted){
-        delete errors.isAccepted
-    }else{
-        errors.isAccepted = "Accepte our regulations"
-    }
-
     return errors;
 }
 
